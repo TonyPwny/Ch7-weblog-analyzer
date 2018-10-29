@@ -124,7 +124,7 @@ public class LogAnalyzer
         int busiestHour = -1;
         int peak = 0;
         for (int hour = 0; hour < hourCounts.length; hour++) {
-            System.out.println(hour +": " + hourCounts[hour]);
+            // System.out.println(hour +": " + hourCounts[hour]);
             
             if (hourCounts[hour] >= peak && hourCounts[hour] != 0) {
                 peak = hourCounts[hour];
@@ -149,7 +149,7 @@ public class LogAnalyzer
         int count = 0;
         
         for (int hour = hourCounts.length - 1; hour >= 0 ; hour--) {
-            System.out.println(hour +": " + hourCounts[hour]);
+            // System.out.println(hour +": " + hourCounts[hour]);
             
             if (hourCounts[hour] <=  low) {
                 
@@ -181,7 +181,7 @@ public class LogAnalyzer
         
         if (busiestHour() != -1) {
             for (int hour = 0; hour < hourCounts.length - 1; hour++) {
-                System.out.println(hour +": " + hourCounts[hour]);
+                // System.out.println(hour +": " + hourCounts[hour]);
                 
                 if ((hourCounts[hour] + hourCounts[hour + 1]) >= peak && hourCounts[hour] != 0) {
                     peak = hourCounts[hour];
@@ -204,7 +204,7 @@ public class LogAnalyzer
         int busiestDay = -1;
         int peak = 0;
         for (int day = 1; day < dayCounts.length; day++) {
-            System.out.println(day +": " + dayCounts[day]);
+            // System.out.println(day +": " + dayCounts[day]);
             
             if (dayCounts[day] >= peak && dayCounts[day] != 0) {
                 peak = dayCounts[day];
@@ -229,7 +229,7 @@ public class LogAnalyzer
         int count = 0;
         
         for (int day = dayCounts.length - 1; day > 0 ; day--) {
-            System.out.println(day +": " + dayCounts[day]);
+            // System.out.println(day +": " + dayCounts[day]);
                 
             if (dayCounts[day] <=  low) {
                     
@@ -281,7 +281,7 @@ public class LogAnalyzer
         int busiestMonth = -1;
         int peak = 0;
         for (int month = 1; month < monthCounts.length; month++) {
-            System.out.println(month +": " + monthCounts[month]);
+            // System.out.println(month +": " + monthCounts[month]);
             
             if (monthCounts[month] >= peak && monthCounts[month] != 0) {
                 peak = monthCounts[month];
@@ -306,7 +306,7 @@ public class LogAnalyzer
         int count = 0;
         
         for (int month = monthCounts.length - 1; month > 0 ; month--) {
-            System.out.println(month +": " + monthCounts[month]);
+            // System.out.println(month +": " + monthCounts[month]);
             
             if (monthCounts[month] <=  low) {
                 
