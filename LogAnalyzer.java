@@ -186,6 +186,11 @@ public class LogAnalyzer
         return quietestDay;
     }
     
+    public void totalMonthlyCounts() {
+        
+        printMonthlyCounts();
+    }
+    
     public void printMonthlyCounts()
     {
         System.out.println("Month: Count");
