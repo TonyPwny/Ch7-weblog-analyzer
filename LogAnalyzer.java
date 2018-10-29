@@ -8,6 +8,9 @@ import java.util.Iterator;
  */
 public class LogAnalyzer
 {
+    private int[] yearCounts;
+    private int[] monthCounts;
+    private int[] dayCounts;
     // Where to calculate the hourly access counts.
     private int[] hourCounts;
     // Use a LogfileReader to access the data.
@@ -17,7 +20,10 @@ public class LogAnalyzer
      * Create an object to analyze hourly web accesses.
      */
     public LogAnalyzer()
-    { 
+    {
+        yearCounts = new int[5];
+        monthCounts = new int[13];
+        dayCounts = new int[29];
         // Create the array object to hold the hourly
         // access counts.
         hourCounts = new int[24];
@@ -25,22 +31,31 @@ public class LogAnalyzer
         reader = new LogfileReader();
     }
     
-        public LogAnalyzer(String filename)
-    { 
+    public LogAnalyzer(String filename)
+    {
+        yearCounts = new int[5];
+        monthCounts = new int[13];
+        dayCounts = new int[29];
         // Create the array object to hold the hourly
         // access counts.
         hourCounts = new int[24];
         // Create the reader to obtain the data.
         reader = new LogfileReader(filename);
     }
-
+    
     /**
      * Analyze the hourly access data from the log file.
      */
-    public void analyzeHourlyData()
+    public void analyzeData()
     {
         while(reader.hasNext()) {
             LogEntry entry = reader.next();
+            int year = entry.getYear();
+            yearCounts[year]++;
+            int month = entry.getMonth();
+            monthCounts[month]++;
+            int day = entry.getDay();
+            dayCounts[day]++;
             int hour = entry.getHour();
             hourCounts[hour]++;
         }
@@ -132,4 +147,47 @@ public class LogAnalyzer
         return busiestTwoHour;
     }
     
+    public int busiestDay() {
+        
+        int busiestDay = -1;
+        int peak = 0;
+        for (int day = 1; day < dayCounts.length; day++) {
+            System.out.println(day +": " + dayCounts[day]);
+            
+            if (dayCounts[day] >= peak && dayCounts[day] != 0) {
+                peak = dayCounts[day];
+                busiestDay = day;
+            }
+        }
+        
+        return busiestDay;
+    }
+    
+    public int quietestDay() {
+        
+        int quietestDay = -1;
+        int low = dayCounts[dayCounts.length - 1];
+        int count = 0;
+        
+        for (int day = dayCounts.length - 1; day > 0 ; day--) {
+            System.out.println(day +": " + dayCounts[day]);
+                
+            if (dayCounts[day] <=  low) {
+                    
+                low = dayCounts[day];
+                quietestDay = day;
+                count++;
+            }
+            if (count == 28) {
+                
+                quietestDay = -1;
+            }
+        }
+        return quietestDay;
+    }
+    
+    public int totalAccessesPerMonth() {
+        
+        return 0;
+    }
 }
