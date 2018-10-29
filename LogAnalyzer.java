@@ -21,7 +21,7 @@ public class LogAnalyzer
      */
     public LogAnalyzer()
     {
-        yearCounts = new int[5];
+        yearCounts = new int[2019];
         monthCounts = new int[13];
         dayCounts = new int[29];
         // Create the array object to hold the hourly
@@ -33,7 +33,7 @@ public class LogAnalyzer
     
     public LogAnalyzer(String filename)
     {
-        yearCounts = new int[5];
+        yearCounts = new int[2019];
         monthCounts = new int[13];
         dayCounts = new int[29];
         // Create the array object to hold the hourly
@@ -186,8 +186,56 @@ public class LogAnalyzer
         return quietestDay;
     }
     
-    public int totalAccessesPerMonth() {
+    public void printMonthlyCounts()
+    {
+        System.out.println("Month: Count");
+        for(int month = 1; month < monthCounts.length; month++) {
+            System.out.println(month + ": " + monthCounts[month]);
+        }
+    }
+    
+    public int busiestMonth() {
         
-        return 0;
+        int busiestMonth = -1;
+        int peak = 0;
+        for (int month = 1; month < monthCounts.length; month++) {
+            System.out.println(month +": " + monthCounts[month]);
+            
+            if (monthCounts[month] >= peak && monthCounts[month] != 0) {
+                peak = monthCounts[month];
+                busiestMonth = month;
+            }
+        }
+        
+        return busiestMonth;
+    }
+    
+    public int quietestMonth() {
+        
+        int quietestMonth = -1;
+        int low = monthCounts[monthCounts.length - 1];
+        int count = 0;
+        
+        for (int month = monthCounts.length - 1; month > 0 ; month--) {
+            System.out.println(month +": " + monthCounts[month]);
+            
+            if (monthCounts[month] <=  low) {
+                
+                low = monthCounts[month];
+                quietestMonth = month;
+                count++;
+            }
+            if (count == 12) {
+                
+                quietestMonth = -1;
+            }
+        }
+        
+        return quietestMonth;
+    }
+    
+    public int averageAccessesPerMonth() {
+        int average = numberOfAccesses()/12;
+        return average;
     }
 }
